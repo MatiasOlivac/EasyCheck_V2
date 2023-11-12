@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateLeft()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Bienvenido {{ usernameFromLocalStorage }}
     </ion-title>
+    <ion-buttons slot="end"> 
+      <ion-button (click)="navigateRight()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- Agrega un mensaje con estilo responsivo -->
+    
+    
+    <ion-button expand="full" routerLink="/scanner" color="success">SCANEAR CODIGO QR</ion-button>
+
+    <img src="assets/code.svg" alt="QR Ejemplo" class="responsive-image" />
+
+    <ion-button expand="full" routerLink="/app" color="success">GENERAR QR DE PRUEBA</ion-button>
   </div>
 </ion-content>
