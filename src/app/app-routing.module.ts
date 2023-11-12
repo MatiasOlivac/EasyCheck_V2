@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'olvide',
+    loadChildren: () => import('./olvide/olvide.module').then( m => m.OlvidePageModule)
+  },
 ];
 
 @NgModule({
