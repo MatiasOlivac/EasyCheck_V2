@@ -1,60 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../data.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-login-profesor',
+  templateUrl: './login-profesor.page.html',
+  styleUrls: ['./login-profesor.page.scss'],
 })
-export class LoginPage {
-  email: string = '';
-  password: string = '';
-  incorrectPassword: boolean = false;
-  fieldsEmpty: boolean = false;
-  verificationMessage: string = '';
-  isLeftButtonDisabled = true; 
+export class LoginProfesorPage implements OnInit {
+  @ViewChild('inputUsuario') inputUsuario!: ElementRef;
+  @ViewChild('inputContraseña') inputContraseña!: ElementRef;
 
-  constructor(private router: Router, private dataService: DataService) {}
+  formularioLoginProfesor: FormGroup;
 
-  login() {
-    if (!this.email || !this.password) {
-      this.fieldsEmpty = true;
-      this.incorrectPassword = false;
-      return;
-    } else {
-      this.fieldsEmpty = false;
-    }
-
-    this.dataService.authenticate(this.email, 
-    this.password).then((authenticated: any) => {
-      if (authenticated) {
-        this.verificationMessage = 'Cuenta verificada';
-
-        // Establece un indicador de autenticación
-        this.dataService.setAuthenticated(true);
-
-        // Habilita el botón izquierdo
-        this.isLeftButtonDisabled = false;
-
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 5000);
-      } else {
-        this.incorrectPassword = true;
-        this.verificationMessage = '';
-      }
+  constructor(
+    public fb: FormBuilder,
+    public alertController: AlertController,
+    private router: Router 
+  ) {
+    this.formularioLoginProfesor = this.fb.group({
+      'user': new FormControl('', Validators.required),
+      'password': new FormControl('', Validators.required)
     });
   }
 
-  navigateLeft() {
-    // No haces nada o muestras un mensaje de error si el botón está deshabilitado
+  ngOnInit() {
+    
   }
 
-  navigateRight() {
-    if (!this.isLeftButtonDisabled) {
-      this.router.navigate(['/home']);
+  ngAfterViewInit() {
+    this.formularioLoginProfesor.get('user')?.valueChanges.subscribe(userValue => {
+    });
+
+    this.formularioLoginProfesor.get('password')?.valueChanges.subscribe(passwordValue => {
+    });
+  }
+
+  async ingresar() {
+    var varFormularioLogin = this.formularioLoginProfesor.value;
+    var user = JSON.parse(localStorage.getItem('profesor') || '{}');
+    console.log(varFormularioLogin.user);
+    console.log(user.usuario);
+
+    if (user.usuario === varFormularioLogin.user && user.contraseña === varFormularioLogin.password) {
+      console.log("Ingresado");
+      this.router.navigate(['/main-profesor']);
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Datos Incorrectos',
+        message: 'Verifica tus credenciales e intenta nuevamente.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
     }
   }
 }
-
