@@ -31,12 +31,12 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [GuardsService] //Guards
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) //Guards
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    
   },
   {
     path: 'register',
@@ -49,6 +49,10 @@ const routes: Routes = [
   {
     path: 'error404',
     loadChildren: () => import('./error404/error404.module').then( m => m.Error404PageModule)
+  },
+  {
+    path: 'scanner',
+    loadChildren: () => import('./scanner/scanner.module').then( m => m.ScannerPageModule)
   },
   //////////
   {
