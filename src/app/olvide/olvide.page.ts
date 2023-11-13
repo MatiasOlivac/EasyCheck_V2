@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular'; // Importa NavController
 import { DataService } from '../data.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-olvide',
   templateUrl: './olvide.page.html',
@@ -14,7 +14,7 @@ export class OlvidePage {
   userNotFound: boolean = false;
   searchingCredentials: boolean = false;
 
-  constructor(private navCtrl: NavController, private dataService: DataService) {} // Inyecta NavController
+  constructor(private navCtrl: NavController, private dataService: DataService, private router: Router) {} // Inyecta NavController
 
   recoverPassword() {
     this.searchingCredentials = true;
@@ -25,6 +25,7 @@ export class OlvidePage {
           this.recoveredPassword = user.password;
           this.recoveredEmail = user.email;
           this.userNotFound = false;
+          this.router.navigate(['/set-password']);
         } else {
           this.userNotFound = true;
           // Reinicia las variables de contraseña y correo
