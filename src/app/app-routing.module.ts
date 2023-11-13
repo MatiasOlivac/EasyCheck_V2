@@ -31,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) //Guards
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), 
+    //canActivate: [GuardsService] CREÓ QUE ESTA BIEN LA LOGICA PERO MAL IMPLEMENTADO
   },
   {
     path: 'login',
