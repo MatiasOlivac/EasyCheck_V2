@@ -107,6 +107,7 @@ export class RegisterPage implements OnInit {
     this.navCtrl.back();
   }
 
+  // DE API "COMUNAS"
   loadCommunes(city: { id: number; name: string }) {
     const cityId = city.id;
     this.http.get<any>(`https://dev.matiivilla.cl/duoc/location/comuna/${cityId}`).subscribe({

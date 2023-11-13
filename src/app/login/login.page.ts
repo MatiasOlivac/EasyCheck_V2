@@ -29,7 +29,7 @@ export class LoginPage {
     this.dataService.authenticate(this.email, 
     this.password).then((authenticated: any) => {
       if (authenticated) {
-        this.verificationMessage = 'Verificación exitosa, redireccionando...';
+        this.verificationMessage = 'Cuenta verificada';
 
         // Establece un indicador de autenticación
         this.dataService.setAuthenticated(true);
