@@ -55,6 +55,11 @@ const routes: Routes = [
     path: 'scanner',
     loadChildren: () => import('./scanner/scanner.module').then( m => m.ScannerPageModule)
   },
+  {
+    path: 'set-password',
+    loadChildren: () => import('./set-password/set-password.module').then( m => m.SetPasswordPageModule)
+  },
+
   //////////
   {
     path: '**',
